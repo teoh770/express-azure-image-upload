@@ -12,6 +12,8 @@ In your Express router:
 var express = require( "express" );
 var ImageUpload = require( "express-azure-image-upload" );
 
+var router = express.Router();
+
 
 function imageHandler () {
 
@@ -25,8 +27,6 @@ function imageHandler () {
 
 }
 
-
-var router = express.Router();
 
 router.post( "/whatever", imageHandler() );
 ```
