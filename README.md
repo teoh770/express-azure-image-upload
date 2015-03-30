@@ -6,7 +6,7 @@ When creating an instance of `ImageUpload` you will need to provide three parame
 * `storageKey` - The access key associated with `storageAcct`.
 * `storageContainer` - The name of a storage container that exists under `storageAcct`.
 
-In your Express router:
+**In your Express router:**
 
 ```javascript
 var express = require( "express" );
@@ -15,18 +15,20 @@ var ImageUpload = require( "express-azure-image-upload" );
 var router = express.Router();
 
 
-function imageHandler () {
+var storageAcct = "yourStorageAcct";
+var storageKey = "yourStorageKey";
+var storageContainer = "yourStorageContainer";
 
-    var storageAcct = "yourStorageAcct";
-    var storageKey = "yourStorageKey";
-    var storageContainer = "yourStorageContainer";
-
-    var imageUpload = new ImageUpload( storageAcct, storageKey, storageContainer );
-
-    return imageUpload.handler;
-
-}
+var imageUpload = new ImageUpload( storageAcct, storageKey, storageContainer );
 
 
-router.post( "/whatever", imageHandler() );
+router.post( "/whatever", function ( req, res, next ) {
+
+    imageUpload.handler( req, res, next );
+
+} );
 ```
+
+**When making a POST request:**
+
+Include the image in a form data property named `image`.
